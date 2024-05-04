@@ -112,7 +112,7 @@ def suggest():
         except:
             print(track_details)
 
-    return redirect(url_for('home_page'))
+    return redirect(f"{request.url_root}")
 
 @suggestions_bp.route('/add-to-playlist', methods=['POST'])
 def add_to_playlist():
@@ -162,4 +162,4 @@ def add_to_playlist():
     session['playlist_link'] = playlist_link
     session['playlist_name'] = playlist_name
 
-    return redirect(url_for('home_page'))
+    return redirect(f"{request.url_root}")

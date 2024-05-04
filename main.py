@@ -46,8 +46,9 @@ def home_page():
 
     return render_template(
         'home.html', 
-        login_url=f"{request.base_url}/spotify-login", 
-        logout_url=f"{request.base_url}/spotify-logout",
+        home_url=f"{request.url_root}",
+        login_url=f"{request.url_root}/spotify-login", 
+        logout_url=f"{request.url_root}/spotify-logout",
         user_details=user_details, 
         messages=messages,
         suggested_tracks=suggested_tracks, 

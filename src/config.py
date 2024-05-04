@@ -7,7 +7,7 @@ class Config:
     # SPOTIFY
     SPOTIFY_CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID')
     SPOTIFY_CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET')
-    REDIRECT_URI = os.environ.get('REDIRECT_URI')
+    REDIRECT_URI = f"http://34.28.219.91:8000/callback"
     SCOPE = "user-read-private user-read-email playlist-modify-private"
     SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
     SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
