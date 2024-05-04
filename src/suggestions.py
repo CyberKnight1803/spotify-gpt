@@ -16,6 +16,10 @@ openai_client = OpenAI(api_key=Config.OPENAI_API_KEY)
 @suggestions_bp.route('/suggest', methods=['POST'])
 def suggest():
 
+    if 'playlist_link' in session:
+        session.pop('playlist_name', None)
+        session.pop('playlist_link', None)
+
     if 'user-name' not in session:
         messages = json.dumps({'error': 'Please login to get suggestions.'})
         return redirect(url_for('home_page', messages=messages))
@@ -109,6 +113,7 @@ def suggest():
 
             suggested_tracks.append(track_data)
             session['suggested_tracks'] = suggested_tracks
+            session['user_prompt'] = user_prompt
         except:
             print(track_details)
 
@@ -159,6 +164,7 @@ def add_to_playlist():
     )
 
     session.pop('suggested_tracks', None)
+    session.pop('user_prompt', None)
     session['playlist_link'] = playlist_link
     session['playlist_name'] = playlist_name
 

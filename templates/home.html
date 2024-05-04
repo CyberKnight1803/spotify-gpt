@@ -8,8 +8,8 @@
         <title>Spotify GPT</title>
     </head>
     <body>
-        <nav class="p-4 navbar navbar-expand-lg navbar-light justify-content-between">
-            <a class="navbar-brand" href="{{ home_url }}">Spotify GPT</a>
+        <nav class="mx-4 p-4 navbar navbar-expand-lg navbar-light justify-content-between">
+            <a class="navbar-brand fs-3 fw-bolder" href="{{ home_url }}">Spotify GPT</a>
             <ul class="nav justify-content-end">
                 {% if user_details %}
                     <li class="nav-item">
@@ -33,7 +33,7 @@
         </nav>
         
         
-        <form class="p-4 my-4 container w-50" action="/suggest" method="post">
+        <form class="p-4 my-4 container w-75" action="/suggest" method="post">
             <div class="mb-3">
                 <label 
                 for="exampleInputEmail1" 
@@ -83,14 +83,26 @@
             </div>
         {% endif %}
         
+        {% if user_prompt %}
+        <div class="px-4 container w-75">
+            <p>
+                <span class="px-2 fs-4 fw-bolder">
+                    Prompt:
+                </span>
+                <span class="px-2 fs-4 fw-light">
+                    {{ user_prompt }} 
+                </span>
+            </p>
+        </div>
+        {% endif %}
 
         {% if suggested_tracks %}
-            <form class="p-4 my-4 container w-50 justify-content-center" method="post" action="/add-to-playlist">      
+            <form class="p-4 my-4 container w-75 justify-content-center" method="post" action="/add-to-playlist">      
                 <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Select</th>
                         <th scope="col">#</th>
+                        <th scope="col">Select</th>
                         <th scope="col">Title</th>
                         <th scope="col">Artists</th>
                         <th scopre="col">Link</th>
@@ -99,16 +111,23 @@
                     <tbody>
                     {% for track in suggested_tracks %}
                         <tr>
-                            <th scope="row">
+                            <th scope="row" class="align-middle">
                                 {{ loop.index }}
                             </th>
-                            <td>
-                                <input class="form-check-input" type="checkbox" value="{{track['id']}}" id="flexCheckDefault" name="track_ids[]">
+                            <td class="align-middle">
+                                <input class="form-check-input justify-content-center" type="checkbox" value="{{track['id']}}" id="flexCheckDefault" name="track_ids[]">
                             </td>
-                            <td scope="col">
-                                {{track['name']}}
+                            <td scope="col" class="d-flex p-2 align-middle">
+                                <span class="p-2 align-middled d-inline-flex">
+                                    <img class="rounded" src="{{track['images'][2]['url']}}" alt="{{track['images'][2]['url']}}" width="48" height="48">
+                                </span>
+                                <span class="p-2 align-middle d-inline-flex text-center justify-content-center">
+                                    <p class="text-center my-2">
+                                        {{track['name']}}
+                                    </p>
+                                </span>
                             </td>
-                            <td scope="col">
+                            <td scope="col" class="align-middle">
                                 {{ ', '.join(track['artists']) }}
                             </td>
                             <td>
@@ -140,7 +159,7 @@
                     required
                     >
                 </div>
-                <button type="submit" class="btn btn-primary">Add to playlist</button>
+                <button type="submit" class="btn btn-primary">Create playlist</button>
             </form>
         {% endif %}
 

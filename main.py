@@ -32,9 +32,11 @@ def home_page():
 
     if 'suggested_tracks' in session:
         suggested_tracks = session['suggested_tracks']
+        user_prompt = session['user_prompt']
     
     else:
         suggested_tracks = None
+        user_prompt = None
     
     if 'playlist_link' in session:
         playlist_name = session['playlist_name']
@@ -53,7 +55,8 @@ def home_page():
         messages=messages,
         suggested_tracks=suggested_tracks, 
         playlist_link=playlist_link,
-        playlist_name=playlist_name
+        playlist_name=playlist_name,
+        user_prompt=user_prompt
     )
 
 
